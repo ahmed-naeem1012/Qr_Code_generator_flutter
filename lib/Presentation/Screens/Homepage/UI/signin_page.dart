@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_print, depend_on_referenced_packages, unused_field
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,10 @@ import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/home_page.dart
 import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/register_page.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_password_field.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_text_field.dart';
+import 'package:get/get.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 class SignInPage extends StatefulWidget {
   @override
@@ -17,6 +21,47 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   bool isPasswordVisible = true;
+  bool _isLoading = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    const String url = 'https://reqres.in/api/login';
+    final Map<String, String> headers = {'Content-Type': 'application/json'};
+    final Map<String, dynamic> body = {
+      'email': _emailController.text.trim(),
+      'password': _passwordController.text.trim(),
+    };
+
+    try {
+      final response = await http.post(Uri.parse(url),
+          headers: headers, body: json.encode(body));
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+
+        Get.to(() => const HomePage(
+              title: 'Explore USKT Admin',
+            ));
+        print('Login successful!');
+        print('Token: ${responseData['token']}');
+      } else {
+        // Error occurred during login
+        // Handle the error here (e.g., show an error message)
+        print('Login failed. Error code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Exception occurred during login: $e');
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +110,13 @@ class _SignInPageState extends State<SignInPage> {
                           const SizedBox(
                             height: 60,
                           ),
-                          const MyTextField(
+                          MyTextField(
+                            emailfield: _emailController,
                             hintText: 'Phone, email or username',
                             inputType: TextInputType.text,
                           ),
                           MyPasswordField(
+                            passController: _passwordController,
                             isPasswordVisible: isPasswordVisible,
                             onTap: () {
                               setState(() {
@@ -110,12 +157,16 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                                builder: (_) => const HomePage(
-                                      title: 'Explore USKT Admin',
-                                    )), // Replace with your next screen
-                          );
+                          _login();
+
+                          print(_emailController.text);
+                          print(_passwordController.text);
+                          // Navigator.of(context).pushReplacement(
+                          //   MaterialPageRoute(
+                          //       builder: (_) => const HomePage(
+                          //             title: 'Explore USKT Admin',
+                          //           )), // Replace with your next screen
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

@@ -1,21 +1,26 @@
+// ignore_for_file: unnecessary_new, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:qr_generator_app/Presentation/Declarations/Constants/constants.dart';
 
 class MyPasswordField extends StatelessWidget {
-  const MyPasswordField({
+  MyPasswordField({
     Key? key,
     required this.isPasswordVisible,
     required this.onTap,
+    required this.passController,
   }) : super(key: key);
 
   final bool isPasswordVisible;
   final Function onTap;
+  TextEditingController passController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(
+        controller: passController,
         style: kBodyText.copyWith(
           color: Colors.white,
         ),
@@ -35,18 +40,18 @@ class MyPasswordField extends StatelessWidget {
               ),
             ),
           ),
-          contentPadding: EdgeInsets.all(20),
+          contentPadding: const EdgeInsets.all(20),
           hintText: 'Password',
           hintStyle: kBodyText,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.grey,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(18),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.white,
               width: 1,
             ),

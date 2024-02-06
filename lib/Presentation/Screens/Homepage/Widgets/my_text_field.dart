@@ -1,21 +1,26 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import '../../../Declarations/Constants/constants.dart';
 
 class MyTextField extends StatelessWidget {
-  const MyTextField({
+  MyTextField({
     Key? key,
     required this.hintText,
     required this.inputType,
+    required this.emailfield,
   }) : super(key: key);
   final String hintText;
   final TextInputType inputType;
+  TextEditingController emailfield = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(
+        controller: emailfield,
         style: kBodyText.copyWith(color: Colors.white),
         keyboardType: inputType,
         textInputAction: TextInputAction.next,

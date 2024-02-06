@@ -1,11 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
+// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:qr_generator_app/Presentation/Declarations/Constants/constants.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/my_text_button.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_password_field.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_text_field.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -57,26 +55,26 @@ class _RegisterPageState extends State<RegisterPage> {
                           const SizedBox(
                             height: 50,
                           ),
-                          const MyTextField(
-                            hintText: 'Name',
-                            inputType: TextInputType.name,
-                          ),
-                          const MyTextField(
-                            hintText: 'Email',
-                            inputType: TextInputType.emailAddress,
-                          ),
-                          const MyTextField(
-                            hintText: 'Phone',
-                            inputType: TextInputType.phone,
-                          ),
-                          MyPasswordField(
-                            isPasswordVisible: passwordVisibility,
-                            onTap: () {
-                              setState(() {
-                                passwordVisibility = !passwordVisibility;
-                              });
-                            },
-                          )
+                          // const MyTextField(
+                          //   hintText: 'Name',
+                          //   inputType: TextInputType.name,
+                          // ),
+                          // const MyTextField(
+                          //   hintText: 'Email',
+                          //   inputType: TextInputType.emailAddress,
+                          // ),
+                          // const MyTextField(
+                          //   hintText: 'Phone',
+                          //   inputType: TextInputType.phone,
+                          // ),
+                          // MyPasswordField(
+                          //   isPasswordVisible: passwordVisibility,
+                          //   onTap: () {
+                          //     setState(() {
+                          //       passwordVisibility = !passwordVisibility;
+                          //     });
+                          //   },
+                          // )
                         ],
                       ),
                     ),

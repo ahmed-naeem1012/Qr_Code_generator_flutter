@@ -39,7 +39,7 @@ class InputField extends StatelessWidget {
               )),
           filled: true,
           fillColor: const Color.fromARGB(255, 245, 243, 243),
-          labelText: "Enter the data for generating QR Code",
+          hintText: "Enter the data for generating QR Code",
           labelStyle: TextStyle(color: primaryColor),
         ),
       ),
