@@ -1,6 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_print, depend_on_referenced_packages, unused_field, use_build_context_synchronously
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -149,31 +148,6 @@ class _SignInPageState extends State<SignInPage> {
                         ],
                       ),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Text(
-                    //       "Dont't have an account? ",
-                    //       style: kBodyText,
-                    //     ),
-                    //     GestureDetector(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           CupertinoPageRoute(
-                    //             builder: (context) => RegisterPage(),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Text(
-                    //         'Register',
-                    //         style: kBodyText.copyWith(
-                    //           color: Colors.white,
-                    //         ),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -187,11 +161,10 @@ class _SignInPageState extends State<SignInPage> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(14), // <-- Radius
+                              borderRadius: BorderRadius.circular(14),
                             ),
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 160, vertical: 20),
+                                horizontal: 140, vertical: 20),
                             textStyle: const TextStyle(
                                 fontSize: 12, color: Colors.black)),
                         child: const Text(
@@ -202,7 +175,7 @@ class _SignInPageState extends State<SignInPage> {
                               fontWeight: FontWeight.w600),
                         )),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                   ],
                 ),

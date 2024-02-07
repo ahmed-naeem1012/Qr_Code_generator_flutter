@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../../Components/app_bar.dart';
 import '../../../Components/spacer.dart';
@@ -33,18 +35,39 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: buildAppBar(appBarTitle: widget.title),
-        body: Column(
-          children: [
-            HeightSpacer(myHeight: kSpacing),
-            InputField(
-                controller: textEditingController,
-                generateQR: () => generateQRCode()),
-            HeightSpacer(myHeight: kSpacing),
-            QRWidget(data: textEditingController.text),
-          ],
-        ));
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+          appBar: buildAppBar(appBarTitle: widget.title),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.grey,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/Images/logo.jpg',
+                      height: 130,
+                      width: 130,
+                    ),
+                  ),
+                ),
+                HeightSpacer(myHeight: kSpacing),
+                InputField(
+                    controller: textEditingController,
+                    generateQR: () => generateQRCode()),
+                HeightSpacer(myHeight: kSpacing),
+                QRWidget(data: textEditingController.text),
+              ],
+            ),
+          )),
+    );
   }
 
   generateQRCode() {

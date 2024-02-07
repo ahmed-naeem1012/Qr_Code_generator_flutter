@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.qr_generator_app">
    <application
-        android:label="qr_generator_app"
+        android:label="USKT Admin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

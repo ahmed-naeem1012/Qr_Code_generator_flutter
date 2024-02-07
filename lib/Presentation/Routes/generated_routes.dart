@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/welcome.dart';
+import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/splashscreen.dart';
 import '../Screens/Homepage/UI/home_page.dart';
 
 class RouteGenerator {
@@ -12,7 +12,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => const HomePage(title: 'Explore USKT Admin'));
       case '//':
-        return MaterialPageRoute(builder: (_) => WelcomePage());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       default:
         return _errorRoute();
     }

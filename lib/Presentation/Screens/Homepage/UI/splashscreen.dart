@@ -1,9 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, deprecated_member_use
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:qr_generator_app/Presentation/Declarations/Constants/constants.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/home_page.dart';
+import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/welcome.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -31,10 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (_) => const HomePage(
-                  title: 'Explore USKT Admin',
-                )),
+        MaterialPageRoute(builder: (_) => WelcomePage()),
       );
     });
   }
@@ -47,28 +43,43 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: appbarColor,
-      body: FadeTransition(
-        opacity: _animation,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.location_city,
-                color: primaryColor,
-                size: 56,
-              ),
-              Text(
-                'Explore USKT',
-                style: TextStyle(
-                  color: primaryColor,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor:
+            const Color.fromARGB(255, 28, 28, 28).withOpacity(_animation.value),
+        body: FadeTransition(
+          opacity: _animation,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.grey,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/Images/logo.jpg',
+                      height: 130,
+                      width: 130,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Explore USKT ADMIN',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
