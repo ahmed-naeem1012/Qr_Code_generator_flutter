@@ -8,11 +8,12 @@ AppBar buildAppBar({
   List<Widget>? actionWidgets,
 }) =>
     AppBar(
+      leading: Container(),
       title: Text(
         appBarTitle,
         style: const TextStyle(color: Colors.white),
       ),
-      centerTitle: centerTitle ?? false,
+      centerTitle: true,
       backgroundColor: appbarColor,
       actions: actionWidgets ?? [],
     );

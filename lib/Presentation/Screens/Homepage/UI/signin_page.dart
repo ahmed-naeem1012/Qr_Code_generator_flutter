@@ -1,15 +1,17 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_print, depend_on_referenced_packages, unused_field
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_print, depend_on_referenced_packages, unused_field, use_build_context_synchronously
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ndialog/ndialog.dart';
 import 'package:qr_generator_app/Presentation/Declarations/Constants/constants.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/home_page.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/register_page.dart';
+// import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/register_page.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_password_field.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/Widgets/my_text_field.dart';
-import 'package:get/get.dart';
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -26,10 +28,22 @@ class _SignInPageState extends State<SignInPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _login() async {
+    ProgressDialog progressDialog = ProgressDialog(
+      context,
+      title: const Text(
+        'Signing In Admin..',
+        style: TextStyle(color: Colors.black),
+      ),
+      message: const Text(
+        'Please wait',
+        style: TextStyle(color: Colors.black),
+      ),
+      backgroundColor: const Color.fromARGB(184, 0, 0, 0),
+    );
     setState(() {
       _isLoading = true;
     });
-
+    progressDialog.show();
     const String url = 'https://reqres.in/api/login';
     final Map<String, String> headers = {'Content-Type': 'application/json'};
     final Map<String, dynamic> body = {
@@ -43,18 +57,26 @@ class _SignInPageState extends State<SignInPage> {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
 
-        Get.to(() => const HomePage(
-              title: 'Explore USKT Admin',
-            ));
         print('Login successful!');
         print('Token: ${responseData['token']}');
+        progressDialog.dismiss();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (_) => const HomePage(
+                    title: 'Explore USKT Admin',
+                  )),
+        );
       } else {
-        // Error occurred during login
-        // Handle the error here (e.g., show an error message)
         print('Login failed. Error code: ${response.statusCode}');
+        Fluttertoast.showToast(
+            msg: 'Login Failed, Please Try Again',
+            backgroundColor: Colors.black);
+        progressDialog.dismiss();
       }
     } catch (e) {
       print('Exception occurred during login: $e');
+      Fluttertoast.showToast(msg: 'Something went Wrong, Please Try Again');
+      progressDialog.dismiss();
     }
 
     setState(() {
@@ -127,31 +149,31 @@ class _SignInPageState extends State<SignInPage> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Dont't have an account? ",
-                          style: kBodyText,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) => RegisterPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Register',
-                            style: kBodyText.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     const Text(
+                    //       "Dont't have an account? ",
+                    //       style: kBodyText,
+                    //     ),
+                    //     GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           CupertinoPageRoute(
+                    //             builder: (context) => RegisterPage(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Text(
+                    //         'Register',
+                    //         style: kBodyText.copyWith(
+                    //           color: Colors.white,
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -161,12 +183,6 @@ class _SignInPageState extends State<SignInPage> {
 
                           print(_emailController.text);
                           print(_passwordController.text);
-                          // Navigator.of(context).pushReplacement(
-                          //   MaterialPageRoute(
-                          //       builder: (_) => const HomePage(
-                          //             title: 'Explore USKT Admin',
-                          //           )), // Replace with your next screen
-                          // );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -184,7 +200,10 @@ class _SignInPageState extends State<SignInPage> {
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.w600),
-                        ))
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),

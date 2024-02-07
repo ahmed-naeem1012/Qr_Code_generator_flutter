@@ -28,18 +28,18 @@ class MyPasswordField extends StatelessWidget {
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          suffixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: IconButton(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: () {},
-              icon: Icon(
-                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                color: Colors.grey,
-              ),
-            ),
-          ),
+          // suffixIcon: Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          //   child: IconButton(
+          //     splashColor: Colors.transparent,
+          //     highlightColor: Colors.transparent,
+          //     onPressed: () {},
+          //     icon: Icon(
+          //       isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+          //       color: Colors.grey,
+          //     ),
+          //   ),
+          // ),
           contentPadding: const EdgeInsets.all(20),
           hintText: 'Password',
           hintStyle: kBodyText,

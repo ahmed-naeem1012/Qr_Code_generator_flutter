@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:qr_generator_app/Presentation/Declarations/Constants/constants.dart';
-import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/register_page.dart';
+// import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/register_page.dart';
 import 'package:qr_generator_app/Presentation/Screens/Homepage/UI/signin_page.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -48,67 +48,70 @@ class WelcomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.grey[850],
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterPage()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(14), // <-- Radius
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 20),
-                                textStyle: const TextStyle(
-                                    fontSize: 12, color: Colors.white)),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            ))),
-                    Expanded(
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignInPage()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey[850],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(14), // <-- Radius
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 20),
-                                textStyle: const TextStyle(
-                                    fontSize: 12, color: Colors.white)),
-                            child: const Text(
-                              'Sign In',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
-                            ))),
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[850],
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Row(
+                    children: [
+                      // Expanded(
+                      //     child: ElevatedButton(
+                      //         onPressed: () {
+                      //           Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) => RegisterPage()),
+                      //           );
+                      //         },
+                      //         style: ElevatedButton.styleFrom(
+                      //             backgroundColor: Colors.white,
+                      //             shape: RoundedRectangleBorder(
+                      //               borderRadius:
+                      //                   BorderRadius.circular(14), // <-- Radius
+                      //             ),
+                      //             padding: const EdgeInsets.symmetric(
+                      //                 horizontal: 12, vertical: 20),
+                      //             textStyle: const TextStyle(
+                      //                 fontSize: 12, color: Colors.white)),
+                      //         child: const Text(
+                      //           'Register',
+                      //           style: TextStyle(
+                      //               color: Colors.black,
+                      //               fontSize: 18,
+                      //               fontWeight: FontWeight.w600),
+                      //         ))),
+                      Expanded(
+                          child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignInPage()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey[850],
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(14), // <-- Radius
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 20),
+                                  textStyle: const TextStyle(
+                                      fontSize: 12, color: Colors.white)),
+                              child: const Text(
+                                'Sign In',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ))),
+                    ],
+                  ),
                 ),
               )
             ],
